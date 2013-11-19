@@ -1,0 +1,15 @@
+#!/bin/sh
+BASEDIR=$(dirname $0)
+TESTDIR=$BASEDIR/../../test
+FIXDIR=$BASEDIR/../../test/fixtures
+MINDIR=$BASEDIR/../../test/min
+
+if [ ! -d "$MINDIR" ]; then
+	mkdir $MINDIR
+fi
+
+for f in $FIXDIR/*
+do
+  #echo "$f"
+  minify $f $MINDIR/$(basename $f)
+done  

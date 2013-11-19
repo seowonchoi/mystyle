@@ -1,0 +1,14 @@
+#!/bin/sh
+BASEDIR=$(dirname $0)
+CSSDIR=$BASEDIR/../../css/
+STYDIR=$BASEDIR/../../stylus/
+
+if [ ! -d "$CSSDIR" ]; then
+	mkdir $CSSDIR
+fi
+
+for f in $STYDIR/*
+do
+  stylus $f --out $CSSDIR
+done
+
