@@ -1,14 +1,18 @@
 #!/bin/sh
 BASEDIR=$(dirname $0)
-CSSDIR=$BASEDIR/../../css/
-STYDIR=$BASEDIR/../../stylus/
+TESTDIR=$BASEDIR/../../test
+FIXDIR=$BASEDIR/../../test/fixtures
+TEMPDIR=$BASEDIR/../../test/temp
 
-if [ ! -d "$CSSDIR" ]; then
-	mkdir $CSSDIR
+if [ ! -d "$TEMPDIR" ]; then
+	mkdir $TEMPDIR
 fi
 
-for f in $STYDIR/*
+for f in $FIXDIR/*
 do
-  stylus $f --out $CSSDIR
-done
+  #echo "$f"
+  js-beautify $f > $TEMPDIR/$(basename $f)
+  rm $f
+  mv $TEMPDIR/$(basename $f) $f
+done  
 
